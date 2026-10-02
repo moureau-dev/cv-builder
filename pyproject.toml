@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cv-builder"
+version = "0.1.0"
+description = "Build CV PDFs from Markdown with pandoc and WeasyPrint."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+authors = [{ name = "Moureau Development" }]
+keywords = ["cv", "resume", "markdown", "pdf", "pandoc", "weasyprint"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "pypdf>=4"]
+
+[project.scripts]
+cv-builder = "builder:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+py-modules = ["builder", "cvmeta"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+cv = ["*.html", "*.css"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["integration: requires Docker"]
+
+[tool.ruff]
+line-length = 100

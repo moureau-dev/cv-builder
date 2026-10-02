@@ -1,0 +1,12 @@
+.git
+.github
+build
+out
+.venv
+__pycache__
+*.egg-info
+.pytest_cache
+tests
+examples
+README.md
+LICENSE

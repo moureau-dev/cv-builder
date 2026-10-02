@@ -1,0 +1,45 @@
+name: CV Builder
+description: Build CV PDFs from Markdown with pandoc + WeasyPrint, including PDF info and XMP metadata.
+author: moureau-dev
+
+branding:
+  icon: file-text
+  color: purple
+
+inputs:
+  files:
+    description: >-
+      Space-separated Markdown files, relative to the repository. When omitted,
+      every *.md in `directory` is built (except README/CHANGELOG/license/example files).
+    required: false
+  directory:
+    description: >-
+      Directory to scan for Markdown files when `files` is not set, relative to
+      the repository. Defaults to the repository root.
+    required: false
+    default: "."
+  metadata:
+    description: >-
+      Path to a pandoc metadata YAML, relative to the repository. When omitted,
+      the title, author and creator are derived from each document's first heading.
+    required: false
+  template:
+    description: Path to a pandoc HTML template, relative to the repository. Defaults to the built-in template.
+    required: false
+  stylesheet:
+    description: Path to a CSS stylesheet, relative to the repository. Defaults to the built-in stylesheet.
+    required: false
+  output:
+    description: Output directory, relative to the repository.
+    required: false
+    default: build
+
+outputs:
+  pdf:
+    description: Path of the first generated PDF.
+  pdfs:
+    description: Space-separated paths of all generated PDFs.
+
+runs:
+  using: docker
+  image: docker://ghcr.io/moureau-dev/cv-builder:v1
